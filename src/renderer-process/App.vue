@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/styles/desktop.scss'
+
 </style>

@@ -1,8 +1,10 @@
 'use strict'
 
-import { app, protocol, BrowserWindow } from 'electron'
+import { app, protocol, BrowserWindow, ipcMain } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import IpcRegister from './main-process/IpcRegister'
+
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 protocol.registerSchemesAsPrivileged([
@@ -14,7 +16,7 @@ async function createWindow () {
     width: 1400,
     height: 800,
     webPreferences: {
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+      nodeIntegration: true
     }
   })
 
@@ -61,3 +63,8 @@ if (isDevelopment) {
     })
   }
 }
+
+const ipcRegister = new IpcRegister(ipcMain)
+ipcRegister.registerOn()
+
+console.log('start')

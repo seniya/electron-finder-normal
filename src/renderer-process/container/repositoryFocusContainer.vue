@@ -19,7 +19,6 @@ export default {
       this.$store.dispatch('SIDEBAR_WIDTH', width)
     }
   }
-
 }
 </script>
 

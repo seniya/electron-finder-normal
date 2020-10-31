@@ -3,15 +3,13 @@
     id="repository-sidebar"
     class="resizable-component"
     :style="{width: width + 'px', maxWidth: maximumWidth + 'px', minWidth: minimumWidth+ 'px'}" >
-    <tabBar />
-    <panel />
+    <folderContents />
     <div @mousedown="handleDragStart" class="resize-handle"></div>
   </div>
 </template>
 
 <script>
-import tabBar from '@/renderer-process/components/tabBar.vue'
-import panel from '@/renderer-process/components/panel.vue'
+import folderContents from '@/renderer-process/components/folderContents.vue'
 
 export default {
   props: {
@@ -22,8 +20,7 @@ export default {
   },
 
   components: {
-    tabBar,
-    panel
+    folderContents
   },
 
   data () {

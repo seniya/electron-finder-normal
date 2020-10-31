@@ -1,112 +1,108 @@
 <template>
   <div class="panel">
-    <div class="changes-list-container file-list">
-      <VJstree
-        :data="sampleData"
-        :item-events="itemEvents"
-        @item-click="itemClick" />
-        <!-- :async="loadData" -->
+    <div class="changes-list-container file-list" style="overflow: auto; padding-top: 5px;">
+      <v-treeview
+        :items="$store.state.folders"
+        activatable
+        hoverable
+        dense
+        loading-icon
+        :load-children="onSelectedFolder"
+        :active.sync="active"
+        @update:active="onUpdateActiveFolder">
+        <template v-slot:prepend="{ item, open }">
+          <v-icon v-if="item.nodeKey === 'ROOT'" medium left class="pc-icon">
+            mdi-desktop-classic
+          </v-icon>
+          <v-icon v-else medium left class="folder-icon">
+            {{open ? 'mdi-folder-open' : 'mdi-folder'}}
+          </v-icon>
+        </template>
+        <template v-slot:label="{ item }">
+          <span class="folder-label-text">{{item.label}}</span>
+        </template>
+      </v-treeview>
     </div>
     <div></div>
   </div>
 </template>
 
 <script>
-import VJstree from 'vue-jstree'
+import { ipcRenderer } from 'electron'
+window.ipcRenderer = ipcRenderer
 
 export default {
   components: {
-    VJstree
+
   },
   data () {
     return {
-      itemEvents: {
-        mouseover: function () {
-          // console.log('mouseover')
-        },
-        contextmenu: function () {
-          console.log(arguments[2])
-          arguments[2].preventDefault()
-          console.log('contextmenu')
-        }
-      },
-      sampleData: [
-        {
-          text: 'Same but with checkboxes',
-          opened: true,
-          children: [
-            {
-              text: 'initially selected',
-              selected: true
-            },
-            {
-              text: 'custom icon',
-              icon: 'fa fa-warning icon-state-danger'
-            },
-            {
-              text: 'initially open',
-              icon: 'fa fa-folder icon-state-default',
-              opened: open,
-              children: [
-                {
-                  text: 'Another node',
-                  isLeaf: false,
-                  children: [
-
-                  ]
-                }
-              ]
-            },
-            {
-              text: 'custom icon',
-              icon: 'fa fa-warning icon-state-warning'
-            },
-            {
-              text: 'disabled node',
-              icon: 'fa fa-check icon-state-success',
-              disabled: true
-            }
-          ]
-        },
-        {
-          text: 'And wholerow selection'
-        }
-      ]
+      pathSep: '',
+      selectedFolder: null,
+      contents: [],
+      active: []
     }
   },
+  created () {
+    this.initSystem()
+  },
+  computed: {
+  },
+  watch: {
+    selected: 'randomAvatar'
+  },
   methods: {
-    itemClick (node) {
-      console.log(node.model.text + ' clicked !')
-      console.log('node.model : ', node.model)
-      const data = [
-        { text: 'New Item 1...', isLeaf: false },
-        { text: 'New Item 2...', isLeaf: false }
-      ]
-      console.log(data)
-      // node.model.children = data
+    initSystem () {
+      const res = window.ipcRenderer.sendSync('req_system')
+      const resObj = JSON.parse(res)
+      this.pathSep = resObj.pathSep
+      this.$store.dispatch('DRIVES', resObj.orderItems)
+      this.$store.dispatch('FOLDERS', resObj.folders)
     },
-    loadData (oriNode, resolve) {
-      // console.log('loadData oriNode : ', oriNode)
-      // console.log('loadData resolve : ', resolve)
-      var id = oriNode.data.id ? oriNode.data.id : 0
-      setTimeout(() => {
-        let data = []
-        if (id > 200) {
-          data = []
-        } else {
-          data = [
-            { text: 'New Item 1...' + id, isLeaf: id > 100 },
-            { text: 'New Item 2...' + id, isLeaf: id > 100 }
-          ]
+    clearAllContentItems () {
+      this.contents.splice(0, this.contents.length)
+    },
+    onUpdateActiveFolder (items) {
+      if (this.selectedFolder !== this.active[0]) {
+        console.log('this.selectedFolder : ', this.selectedFolder)
+        if (items.length > 0) {
+          if (items[0] === 'ROOT') {
+            this.clearAllContentItems()
+            this.contents.push(...this.$store.state.drives)
+          } else {
+            this.selectedFolder = items[0] + this.pathSep
+            this.clearAllContentItems()
+            const res = window.ipcRenderer.sendSync('req_folderContents', this.selectedFolder)
+            const newContents = JSON.parse(res)
+            this.contents.push(...newContents)
+          }
+          this.$store.dispatch('FOLDER_CONTENTS', this.contents)
         }
-        resolve(data)
-      }, 500)
+      }
+    },
+    onSelectedFolder (node) {
+      console.log('onSelectedFolder start node: ', node)
+      const res = window.ipcRenderer.sendSync('req_folders', node)
+      const resObj = JSON.parse(res)
+      if (node.children.length) {
+        node.children.splice(0, node.children.length)
+      }
+      node.children.push(...resObj)
+      console.log('onSelectedFolder end')
     }
   }
 
 }
 </script>
 
-<style>
-
+<style lang="scss" >
+.v-treeview--dense .v-treeview-node__root {
+  min-height: 35px !important;
+}
+.pc-icon {
+  color: rgba($color: rgb(43, 22, 7), $alpha: 0.5) !important
+}
+.folder-icon {
+  color: rgba($color: #ccc, $alpha: 0.3) !important
+}
 </style>
