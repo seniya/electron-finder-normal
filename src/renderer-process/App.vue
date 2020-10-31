@@ -1,19 +1,19 @@
 <template>
   <div id="desktop-app-container">
-    <mainContainer />
+    <appMain />
   </div>
 </template>
 
 <script>
-import mainContainer from '@/renderer-process/container/main.vue'
+import appMain from '@/renderer-process/container/appMain.vue'
 export default {
   name: 'App',
   components: {
-    mainContainer
+    appMain
   }
 }
 </script>
 
 <style lang="scss">
-
+@import '../assets/styles/desktop.scss'
 </style>
