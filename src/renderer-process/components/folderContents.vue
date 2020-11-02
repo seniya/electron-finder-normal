@@ -15,7 +15,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in $store.state.folderContents" :key="item.label">
+              <tr v-for="item in $store.state.folderContents" :key="item.label" @dblclick="onDbClickItem(item)">
                 <td class="folder-contents-table-td-1">
                   <div class="folder-contents-table-td-div">
                     <v-icon medium left class="folder-icon">{{$getFileIcon(item.data)}}</v-icon>
@@ -59,7 +59,25 @@ export default {
   },
   computed: { },
   methods: {
+    onDbClickItem (item) {
+      // console.log('onDbClickItem item', item)
+      // console.log('onDbClickItem $store.state.openFolder', this.$store.state.openFolder)
+      // this.$store.dispatch('OPEN_FOLDER', this.selectedFolder)
+      // console.log('onDbClickItem $store.state.openFolder', this.$store.state.openFolder)
 
+      const res = window.ipcRenderer.sendSync('req_folderContents', item.nodeKey)
+      const resParse = JSON.parse(res)
+      const newContents = resParse.contents
+      const folders = resParse.folders
+      this.$store.dispatch('FOLDER_CHILD', { item: item.nodeKey, folders })
+      this.$store.dispatch('FOLDER_CONTENTS', newContents)
+
+      const rootDir = (item.data.rootDir).substring(0, (item.data.rootDir).length - 1)
+      this.$store.dispatch('OPEN_FOLDER', rootDir)
+      this.$store.dispatch('OPEN_FOLDER', item.nodeKey)
+
+      // this.$store.dispatch('SELECTED_FOLDER', item.nodeKey)
+    }
   }
 }
 </script>

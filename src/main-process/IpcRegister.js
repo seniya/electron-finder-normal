@@ -72,10 +72,15 @@ class IpcRegister {
   }
 
   getFolderContents (folder) {
-    const contents = []
-    if (!folder || typeof folder !== 'string') {
-      return contents
+    const returnValue = {
+      contents: [],
+      folders: []
     }
+
+    if (!folder || typeof folder !== 'string') {
+      return returnValue
+    }
+    folder = folder + path.sep
     let newFolders = []
     let newFiles = []
     for (const fileInfo of fnWalkFolders(folder, 0)) {
@@ -89,8 +94,9 @@ class IpcRegister {
     }
     newFolders = _.orderBy(newFolders, ['label'], ['asc'])
     newFiles = _.orderBy(newFiles, ['label'], ['asc'])
-    contents.push(...newFolders, ...newFiles)
-    return contents
+    returnValue.folders = newFolders
+    returnValue.contents.push(...newFolders, ...newFiles)
+    return returnValue
   }
 }
 

@@ -9,6 +9,7 @@
         loading-icon
         :load-children="onSelectedFolder"
         :active.sync="active"
+        :open.sync="$store.state.openFolder"
         @update:active="onUpdateActiveFolder">
         <template v-slot:prepend="{ item, open }">
           <v-icon v-if="item.nodeKey === 'ROOT'" medium left class="pc-icon">
@@ -32,51 +33,57 @@ import { ipcRenderer } from 'electron'
 window.ipcRenderer = ipcRenderer
 
 export default {
-  components: {
-
-  },
+  components: {},
   data () {
     return {
-      pathSep: '',
-      selectedFolder: null,
-      contents: [],
       active: []
     }
   },
   created () {
     this.initSystem()
   },
-  computed: {
-  },
-  watch: {
-    selected: 'randomAvatar'
-  },
+  computed: {},
+  watch: {},
   methods: {
     initSystem () {
       const res = window.ipcRenderer.sendSync('req_system')
       const resObj = JSON.parse(res)
-      this.pathSep = resObj.pathSep
-      this.$store.dispatch('DRIVES', resObj.orderItems)
+      this.$store.dispatch('DRIVES', resObj.drives)
       this.$store.dispatch('FOLDERS', resObj.folders)
     },
-    clearAllContentItems () {
-      this.contents.splice(0, this.contents.length)
-    },
     onUpdateActiveFolder (items) {
-      if (this.selectedFolder !== this.active[0]) {
-        console.log('this.selectedFolder : ', this.selectedFolder)
+      // console.log('onUpdateActiveFolder items[0] :', items[0])
+      // console.log('onUpdateActiveFolder this.active[0] :', this.active[0])
+      // console.log('onUpdateActiveFolder this.$store.state.selectedFolder :', this.$store.state.selectedFolder)
+
+      if (this.$store.state.selectedFolder !== this.active[0]) {
+        // console.log('this.selectedFolder : ', this.selectedFolder)
+        // console.log('this.$store.state.folders : ', this.$store.state.folders)
+        // console.log('this.$store.state.drives : ', this.$store.state.drives)
         if (items.length > 0) {
           if (items[0] === 'ROOT') {
-            this.clearAllContentItems()
-            this.contents.push(...this.$store.state.drives)
+            this.$store.dispatch('FOLDER_CONTENTS', this.$store.state.drives)
           } else {
-            this.selectedFolder = items[0] + this.pathSep
-            this.clearAllContentItems()
-            const res = window.ipcRenderer.sendSync('req_folderContents', this.selectedFolder)
-            const newContents = JSON.parse(res)
-            this.contents.push(...newContents)
+            // console.log('onUpdateActiveFolder items[0] : ', items[0])
+            // this.selectedFolder = items[0] + this.pathSep
+            // this.selectedFolder = items[0]
+            this.$store.dispatch('SELECTED_FOLDER', items[0])
+            // this.$store.state.selectedFolder
+            const res = window.ipcRenderer.sendSync('req_folderContents', this.$store.state.selectedFolder)
+            const resParse = JSON.parse(res)
+            const newContents = resParse.contents
+            const folders = resParse.folders
+            this.$store.dispatch('FOLDER_CHILD', { item: this.$store.state.selectedFolder, folders })
+            this.$store.dispatch('FOLDER_CONTENTS', newContents)
           }
-          this.$store.dispatch('FOLDER_CONTENTS', this.contents)
+        }
+        if (items[0] === undefined) {
+          const res = window.ipcRenderer.sendSync('req_folderContents', this.$store.state.selectedFolder)
+          const resParse = JSON.parse(res)
+          const newContents = resParse.contents
+          const folders = resParse.folders
+          this.$store.dispatch('FOLDER_CHILD', { item: this.$store.state.selectedFolder, folders })
+          this.$store.dispatch('FOLDER_CONTENTS', newContents)
         }
       }
     },
