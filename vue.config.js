@@ -3,11 +3,9 @@ module.exports = {
   pluginOptions: {
     electronBuilder: {
       nodeIntegration: true,
-      mainProcessFile: 'src/main-process.js',
-      rendererProcessFile: 'src/renderer-process.js',
       mainProcessWatch: [
         'src/main-process',
-        'src/main-process.js'
+        'src/background.js'
       ]
     }
   },

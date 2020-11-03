@@ -2,8 +2,11 @@ import fnGetDrives from '@/lib/fnGetDrives'
 import fnWalkFolders from '@/lib/fnWalkFolders'
 import fnCreateNode from '@/lib/fnCreateNode'
 import _ from 'lodash'
+import exifr from 'exifr'
 
+const fs = require('fs')
 const path = require('path')
+const sharp = require('sharp')
 
 class IpcRegister {
   constructor (ipcMain) {
@@ -46,6 +49,25 @@ class IpcRegister {
       const resObj = await this.getFolderContents(res)
       event.returnValue = JSON.stringify(resObj)
     })
+
+    this.ipcMain.on('req_imageData', async (event, res) => {
+      console.log('ipcMain.on req_imageData : ')
+      const resObj = await this.getImage(res)
+      event.returnValue = JSON.stringify(resObj)
+    })
+  }
+
+  async getImage (node) {
+    const fileBuffer = fs.readFileSync(node.nodeKey)
+    const sharpBuffer = await sharp(fileBuffer)
+      .resize({ width: 300 })
+      .png()
+      .toBuffer()
+    const base64 = sharpBuffer.toString('base64')
+    const exifrInfo = await exifr.parse(fileBuffer)
+    const returnObj = { base64, exifrInfo }
+    // console.log('getImage base64 : ', base64)
+    return returnObj
   }
 
   getFolders (node) {

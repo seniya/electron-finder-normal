@@ -24,7 +24,8 @@ export default new Vuex.Store({
     folders: [],
     folderContents: [],
     openFolder: [],
-    selectedFolder: null
+    selectedFolder: null,
+    selectedContent: null
   },
   mutations: {
     setSidebarWidth (state, width) {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     setSelectedFolder (state, selectedFolder) {
       state.selectedFolder = selectedFolder
+    },
+    setSelectedContent (state, selectedContent) {
+      state.selectedContent = selectedContent
     }
 
   },
@@ -87,6 +91,9 @@ export default new Vuex.Store({
     },
     SELECTED_FOLDER (context, payload) {
       context.commit('setSelectedFolder', payload)
+    },
+    SELECTED_CONTENT (context, payload) {
+      context.commit('setSelectedContent', payload)
     }
   },
   modules: {}

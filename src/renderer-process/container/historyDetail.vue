@@ -5,15 +5,17 @@
       :maximumWidth="1000"
       :minimumWidth="400"
       :onResize="onResize" />
-    <div class="seamless-diff-switcher has-diff">메타정보의 표시</div>
+    <preview />
   </div>
 </template>
 
 <script>
 import historyDetailSidebar from '@/renderer-process/container/historyDetailSidebar.vue'
+import preview from '@/renderer-process/components/preview.vue'
 export default {
   components: {
-    historyDetailSidebar
+    historyDetailSidebar,
+    preview
   },
   methods: {
     onResize (width) {

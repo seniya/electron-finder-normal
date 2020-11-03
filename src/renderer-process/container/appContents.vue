@@ -1,23 +1,19 @@
 <template>
   <div id="desktop-app-contents">
-    <appToolbar />
-    <div></div>
-    <appRepository />
-    <div></div>
-    <div></div>
+    <contentsToolbar />
+    <contentsRepository />
   </div>
 </template>
 
 <script>
-import appToolbar from '@/renderer-process/container/appToolbar.vue'
-import appRepository from '@/renderer-process/container/appRepository.vue'
+import contentsToolbar from '@/renderer-process/container/contentsToolbar.vue'
+import contentsRepository from '@/renderer-process/container/contentsRepository.vue'
 
 export default {
   components: {
-    appToolbar,
-    appRepository
+    contentsToolbar,
+    contentsRepository
   }
-
 }
 </script>
 

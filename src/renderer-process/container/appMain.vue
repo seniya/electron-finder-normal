@@ -1,18 +1,21 @@
 <template>
-  <div id="desktop-app-chrome" class="blurred">
-    <contentsToolbar />
-    <contentsRepository />
+  <div id="desktop-app-chrome" class="focused">
+  <!-- <div id="desktop-app-chrome" class="blurred"> -->
+    <appTitleBar />
+    <appContents />
   </div>
 </template>
 
 <script>
-import contentsToolbar from '@/renderer-process/container/contentsToolbar.vue'
-import contentsRepository from '@/renderer-process/container/contentsRepository.vue'
+import appTitleBar from '@/renderer-process/container/appTitleBar.vue'
+import appContents from '@/renderer-process/container/appContents.vue'
 
 export default {
   components: {
-    contentsToolbar,
-    contentsRepository
+    // contentsToolbar,
+    // contentsRepository,
+    appTitleBar,
+    appContents
   }
 }
 </script>

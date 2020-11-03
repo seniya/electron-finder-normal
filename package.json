@@ -11,13 +11,15 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps"
   },
-  "main": "main-process.js",
+  "main": "background.js",
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "core-js": "^3.6.5",
+    "exifr": "^6.0.0",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "roboto-fontface": "*",
+    "sharp": "^0.26.2",
     "vue": "^2.6.11",
     "vue-jstree": "^2.1.6",
     "vuetify": "^2.2.11",

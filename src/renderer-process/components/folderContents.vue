@@ -15,7 +15,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in $store.state.folderContents" :key="item.label" @dblclick="onDbClickItem(item)">
+              <tr v-for="item in $store.state.folderContents" :key="item.label" @dblclick="onDbClickItem(item)" @click="onClickItem(item)">
                 <td class="folder-contents-table-td-1">
                   <div class="folder-contents-table-td-div">
                     <v-icon medium left class="folder-icon">{{$getFileIcon(item.data)}}</v-icon>
@@ -46,19 +46,21 @@ import { ipcRenderer } from 'electron'
 window.ipcRenderer = ipcRenderer
 
 export default {
-  components: {
-
-  },
   data () {
     return {
 
     }
   },
-  created () {
-
-  },
+  created () { },
   computed: { },
   methods: {
+    onClickItem (item) {
+      console.log('onClickItem item: ', item)
+      this.$store.dispatch('SELECTED_CONTENT', item)
+      // const res = window.ipcRenderer.sendSync('req_imageData', item)
+      // const resParse = JSON.parse(res)
+      // console.log('onClickItem resParse : ', resParse)
+    },
     onDbClickItem (item) {
       // console.log('onDbClickItem item', item)
       // console.log('onDbClickItem $store.state.openFolder', this.$store.state.openFolder)
@@ -76,6 +78,7 @@ export default {
       this.$store.dispatch('OPEN_FOLDER', rootDir)
       this.$store.dispatch('OPEN_FOLDER', item.nodeKey)
 
+      // this.$store.dispatch('SELECTED_CONTENT', null)
       // this.$store.dispatch('SELECTED_FOLDER', item.nodeKey)
     }
   }

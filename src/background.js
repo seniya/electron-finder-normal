@@ -8,7 +8,7 @@ import IpcRegister from './main-process/IpcRegister'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 protocol.registerSchemesAsPrivileged([
-  { scheme: 'app', privileges: { secure: true, standard: true } }
+  { scheme: 'app', privileges: { secure: false, standard: false } }
 ])
 
 async function createWindow () {
@@ -16,7 +16,8 @@ async function createWindow () {
     width: 1400,
     height: 800,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
 
