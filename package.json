@@ -16,6 +16,7 @@
     "@mdi/font": "^3.6.95",
     "core-js": "^3.6.5",
     "exifr": "^6.0.0",
+    "idb": "^5.0.7",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
     "roboto-fontface": "*",

@@ -60,7 +60,7 @@ class IpcRegister {
   async getImage (node) {
     const fileBuffer = fs.readFileSync(node.nodeKey)
     const sharpBuffer = await sharp(fileBuffer)
-      .resize({ width: 300 })
+      .resize({ width: 500 })
       .png()
       .toBuffer()
     const base64 = sharpBuffer.toString('base64')

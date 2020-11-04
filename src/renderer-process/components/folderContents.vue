@@ -2,9 +2,7 @@
   <div class="file-list">
     <div class="list">
       <div class="focus-container list-focus-container">
-        <v-simple-table
-          fixed-header
-          >
+        <v-simple-table fixed-header>
           <template v-slot:default>
             <thead>
               <tr>

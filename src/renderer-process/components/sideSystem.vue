@@ -22,6 +22,17 @@
         <template v-slot:label="{ item }">
           <span class="folder-label-text">{{item.label}}</span>
         </template>
+        <template v-slot:append="{ item }">
+          <v-btn icon v-if="isAbleFav(item)" @click.stop="onFavorite(item)">
+            <v-icon medium>
+              {{isFav(item) ? ' mdi-bookmark' : ' mdi-bookmark-outline'}}
+            </v-icon>
+            <!-- <v-icon medium left class="pc-icon">
+              mdi-bookmark-outline
+            </v-icon> -->
+          </v-btn>
+
+        </template>
       </v-treeview>
     </div>
     <div></div>
@@ -41,6 +52,7 @@ export default {
   },
   created () {
     this.initSystem()
+    console.log('this.$store.state.favKeys : ', this.$store.state.favKeys)
   },
   computed: {},
   watch: {},
@@ -96,6 +108,41 @@ export default {
       }
       node.children.push(...resObj)
       console.log('onSelectedFolder end')
+    },
+    onFavorite (item) {
+      console.log('onFavorite item : ', item)
+      console.log('onFavorite item.ino : ', item.data.stat.ino)
+      this.$emit('save-fav', item)
+    },
+    isAbleFav (item) {
+      if (item.id === 'ROOT') {
+        return false
+      }
+      const rootDir = item.data.rootDir + '\\'
+      if (item.id === rootDir) {
+        return false
+      }
+      if ((item.label).includes('RECYCLE.BIN')) {
+        return false
+      }
+      return true
+    },
+    isFav (item) {
+      if (item.id === 'ROOT') {
+        return false
+      }
+      const rootDir = item.data.rootDir + '\\'
+      if (item.id === rootDir) {
+        return false
+      }
+      if ((item.label).includes('RECYCLE.BIN')) {
+        return false
+      }
+      const allKeys = this.$store.state.favKeys
+      if (allKeys.includes(item.data.stat.ino)) {
+        return true
+      }
+      return false
     }
   }
 

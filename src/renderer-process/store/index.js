@@ -15,6 +15,18 @@ function getObject (array, key, value) {
   })
   return o
 }
+// import { openDB } from 'idb'
+// const dbName = 'finder'
+// const dbTbName = 'fav'
+
+// function initIndexDb () {
+//   return openDB(dbName, 1, {
+//     upgrade: db => {
+//       db.createObjectStore(dbTbName)
+//     }
+//   })
+// }
+// const indexDb = initIndexDb()
 
 export default new Vuex.Store({
   state: {
@@ -25,7 +37,9 @@ export default new Vuex.Store({
     folderContents: [],
     openFolder: [],
     selectedFolder: null,
-    selectedContent: null
+    selectedContent: null,
+    favList: [],
+    favKeys: []
   },
   mutations: {
     setSidebarWidth (state, width) {
@@ -64,6 +78,12 @@ export default new Vuex.Store({
     },
     setSelectedContent (state, selectedContent) {
       state.selectedContent = selectedContent
+    },
+    setFavList (state, favList) {
+      state.favList = favList
+    },
+    setFavKeys (state, favKeys) {
+      state.favKeys = favKeys
     }
 
   },
@@ -94,7 +114,36 @@ export default new Vuex.Store({
     },
     SELECTED_CONTENT (context, payload) {
       context.commit('setSelectedContent', payload)
+    },
+    FAV_LIST (context, payload) {
+      context.commit('setFavList', payload)
+    },
+    FAV_KEYS (context, payload) {
+      context.commit('setFavKeys', payload)
     }
+
+    // async SAVE_FAV (context, payload) {
+    //   const indexDb = await openDB(dbName, 1, {
+    //     upgrade: db => {
+    //       db.createObjectStore(dbTbName)
+    //     }
+    //   })
+    //   console.log('SAVE_FAV indexDb : ', indexDb)
+    //   const allKeys = await indexDb.getAllKeys(dbTbName)
+    //   if (allKeys.includes(payload.data.stat.ino) === false) {
+    //     await indexDb.add(dbTbName, payload, payload.data.stat.ino)
+    //     context.dispatch('SYNC_FAV', allKeys)
+    //   }
+    // },
+    // async SYNC_FAV (context, payload) {
+    //   const indexDb = await openDB(dbName, 1, {
+    //     upgrade: db => {
+    //       db.createObjectStore(dbTbName)
+    //     }
+    //   })
+    //   const allKeys = await indexDb.getAllKeys(dbTbName)
+    //   context.commit('setFavList', allKeys)
+    // }
   },
   modules: {}
 })

@@ -5,37 +5,32 @@
         <div class="text">
           <h1>{{item.label}}</h1>
         </div>
-        <img v-if="item.srcData" :src="item.srcData">
-<!--
-        <div v-if="$store.state.selectedContent">nodeKey: {{$store.state.selectedContent.nodeKey}}</div>
-        <img src="file:///C:/workspace/desktop/dist/GitHubDesktop-dev-win32-x64/resources/app/static/paper-stack.svg" class="blankslate-image">
-         -->
+        <div style="position: relative;">
+          <img v-if="item.srcData" :src="item.srcData" style="width: 100%; border: 1px solid #ccc;">
+        </div>
       </div>
       <div class="suggested-action-group primary replace-height" style="height: 0px;"></div>
       <div class="suggested-action-group normal">
         <div class="suggested-action">
           <div class="text-wrapper">
             <h2>General Info</h2>
-            <p>&nbsp;</p>
+            <hr style="margin-bottom: 10px; margin-top: 5px;">
+            <p class="description">isDir : {{item.data.isDir}}</p>
             <p class="description">mimeType : {{item.data.mimeType}}</p>
-            <p class="description">mimeType : {{item.data.mimeType}}</p>
-            <p class="description">mimeType : {{item.data.mimeType}}</p>
+            <p class="description">rootDir : {{item.data.rootDir}}</p>
+            <p class="description">ino : {{item.data.stat.ino}}</p>
+            <p class="description">size : {{item.data.stat.size}} bytes</p>
           </div>
         </div>
         <div v-if="item.exifrInfo" class="suggested-action">
           <div class="text-wrapper">
             <h2>Image Meta Info</h2>
-            <p>&nbsp;</p>
+            <hr style="margin-bottom: 10px; margin-top: 5px;">
             <p v-for="(value, name) in item.exifrInfo" :key="name" class="description">
               <span>{{name}}</span> : <span>{{value}}</span>
             </p>
           </div>
         </div>
-        <!--
-        <div class="suggested-action"><div class="text-wrapper"><h2>Open the repository in your external editor</h2><p class="description">Select your editor in <a class="link-button-component" href="">Options</a></p><p class="discoverability">Repository menu or <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>A</kbd></p></div><button class="button-component" type="button">Open in Visual Studio Code</button></div>
-        <div class="suggested-action"><div class="text-wrapper"><h2>View the files of your repository in Explorer</h2><p class="discoverability">Repository menu or <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>F</kbd></p></div><button class="button-component" type="button">Show in Explorer</button></div>
-        <div class="suggested-action"><div class="text-wrapper"><h2>Open the repository page on GitHub in your browser</h2><p class="discoverability">Repository menu or <kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>G</kbd></p></div><button class="button-component" type="button">View on GitHub</button></div>
-         -->
       </div>
     </div>
   </div>
@@ -76,21 +71,16 @@ export default {
         }
       }
 
-      if (item.data.mimeType === false) {
+      if (item.data.isDir === true) {
         console.log('폴더 입니다.')
       } else if ((item.data.mimeType).startsWith('image')) {
-        console.log('이미지 파일입니다.')
-
         const res = window.ipcRenderer.sendSync('req_imageData', item)
         const resParse = JSON.parse(res)
         item.srcData = `data:${item.data.mimeType};base64, ${resParse.base64}`
         item.exifrInfo = resParse.exifrInfo
-        console.log('exifrInfo : ', resParse.exifrInfo)
       }
 
       this.item = item
-
-      console.log('actionsUpdateInfo')
     }
   }
 }
