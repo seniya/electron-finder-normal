@@ -14,15 +14,12 @@
           class="list-item"
           tabindex="0"
           style="height: 40px; left: 0px; width: 100%;">
-          <div class="file">
+          <div class="file" @click="onUpdateActiveFolder(item)">
             <div>
               <v-icon medium>mdi-folder</v-icon>
             </div>
             <label class="path-label-component">
               <div class="path-text-component">
-                <!-- <span v-if="indexDb !== null && items[item] !== null && items[item] !== undefined">
-                  <span class="dirname">{{items[item].label}}</span>
-                </span> -->
                 <span>
                   <span class="dirname">{{item.nodeKey}}</span>
                 </span>
@@ -33,18 +30,6 @@
         </div>
 
       </div>
-<!--
-      <v-simple-table>
-          <template v-slot:default>
-            <tbody>
-              <tr v-for="item in $store.state.folderContents" :key="item.label" @dblclick="onDbClickItem(item)" @click="onClickItem(item)">
-                <td >
-
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table> -->
     </div>
     <div></div>
   </div>
@@ -83,7 +68,7 @@ export default {
     async initialize () {
       this.initIndexDb()
       this.indexDb = await this.initIndexDb()
-      console.log('initialize2 indexDb : ', this.indexDb)
+      // console.log('initialize2 indexDb : ', this.indexDb)
       this.getItemLabels()
     },
     async initIndexDb () {
@@ -105,29 +90,6 @@ export default {
       }
     },
 
-    async getItemLabel (itemKey) {
-      // const db = await openDB(this.dbName, 1, {
-      //   upgrade: db => {
-      //     db.createObjectStore(this.dbTbName)
-      //   }
-      // })
-
-      // const value = await db.get(this.dbTbName, itemKey)
-      // console.log('getItemLabel value : ', value)
-
-      // const node = await this.indexDb.get(this.dbTbName, itemKey)
-      // console.log('getItemLabel node : ', node.label)
-      // return node.label + ''
-
-      return 'ddd eee'
-
-      // const node = await this.indexDb.get(this.dbTbName, itemKey).then(
-      //   console.log
-      // )
-      // console.log('getItemLabel node : ', node)
-      // return node.label
-    },
-
     onFavorite (item) {
       console.log('onFavorite item : ', item)
       console.log('onFavorite item.ino : ', item.data.stat.ino)
@@ -145,6 +107,18 @@ export default {
         return false
       }
       return true
+    },
+
+    onUpdateActiveFolder (item) {
+      console.log('onUpdateActiveFolder item : ', item)
+      this.$store.dispatch('SELECTED_FOLDER', item.nodeKey)
+
+      const res = window.ipcRenderer.sendSync('req_folderContents', this.$store.state.selectedFolder)
+      const resParse = JSON.parse(res)
+      const newContents = resParse.contents
+      // const folders = resParse.folders
+      // this.$store.dispatch('FOLDER_CHILD', { item: this.$store.state.selectedFolder, folders })
+      this.$store.dispatch('FOLDER_CONTENTS', newContents)
     }
   }
 

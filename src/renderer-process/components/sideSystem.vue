@@ -58,7 +58,9 @@ export default {
   watch: {},
   methods: {
     initSystem () {
+      // console.log('window.ipcRenderer : ', window.ipcRenderer)
       const res = window.ipcRenderer.sendSync('req_system')
+      // console.log('window.ipcRenderer res : ', res)
       const resObj = JSON.parse(res)
       this.$store.dispatch('DRIVES', resObj.drives)
       this.$store.dispatch('FOLDERS', resObj.folders)

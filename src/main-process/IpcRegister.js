@@ -7,6 +7,8 @@ import exifr from 'exifr'
 const fs = require('fs')
 const path = require('path')
 const sharp = require('sharp')
+const mm = require('music-metadata')
+// const ffmpeg = require('fluent-ffmpeg')
 
 class IpcRegister {
   constructor (ipcMain) {
@@ -55,6 +57,50 @@ class IpcRegister {
       const resObj = await this.getImage(res)
       event.returnValue = JSON.stringify(resObj)
     })
+
+    this.ipcMain.on('req_audioData', async (event, res) => {
+      console.log('ipcMain.on req_audioData : ')
+      const resObj = await this.getAudioImage(res)
+      // console.log('ipcMain.on req_audioData res.channelName: ', res.channelName)
+      // console.log('ipcMain.on req_audioData resObj: ', resObj)
+      event.returnValue = JSON.stringify(resObj)
+    })
+
+    this.ipcMain.on('req_thumb_imageData', async (event, res) => {
+      console.log('ipcMain.on req_thumb_imageData : ')
+      const resObj = await this.getImage(res)
+      resObj.type = 'image'
+      // console.log('ipcMain.on req_thumb_imageData res.channelName: ', res.channelName)
+      // console.log('ipcMain.on req_thumb_imageData resObj: ', resObj)
+      event.sender.send(res.channelName, JSON.stringify(resObj))
+    })
+
+    this.ipcMain.on('req_thumb_audioData', async (event, res) => {
+      console.log('ipcMain.on req_thumb_audioData : ')
+      const resObj = await this.getAudioImage(res)
+      resObj.type = 'audio'
+      // console.log('ipcMain.on req_thumb_audioData res.channelName: ', res.channelName)
+      // console.log('ipcMain.on req_thumb_audioData resObj: ', resObj)
+      event.sender.send(res.channelName, JSON.stringify(resObj))
+    })
+  }
+
+  async getAudioImage (node) {
+    const { common } = await mm.parseFile(node.nodeKey)
+    const cover = mm.selectCover(common.picture)
+
+    const returnObj = { cover, metadata: common }
+    if (cover !== null && cover.data !== null) {
+      const sharpBuffer = await sharp(cover.data)
+        .resize({ width: 500 })
+        .png()
+        .toBuffer()
+      const base64 = sharpBuffer.toString('base64')
+      // console.log('base64 : ', base64)
+      returnObj.base64 = base64
+    }
+
+    return returnObj
   }
 
   async getImage (node) {

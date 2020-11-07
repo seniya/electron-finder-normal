@@ -39,7 +39,11 @@ export default new Vuex.Store({
     selectedFolder: null,
     selectedContent: null,
     favList: [],
-    favKeys: []
+    favKeys: [],
+    isPreview: true,
+    listType: 'TableView',
+    currentTitle: '내PC',
+    isAbout: false
   },
   mutations: {
     setSidebarWidth (state, width) {
@@ -84,6 +88,18 @@ export default new Vuex.Store({
     },
     setFavKeys (state, favKeys) {
       state.favKeys = favKeys
+    },
+    setIsPreview (state, isPreview) {
+      state.isPreview = isPreview
+    },
+    setListType (state, listType) {
+      state.listType = listType
+    },
+    setCurrentTitle (state, currentTitle) {
+      state.currentTitle = currentTitle
+    },
+    setIsAbout (state, isAbout) {
+      state.isAbout = isAbout
     }
 
   },
@@ -120,6 +136,18 @@ export default new Vuex.Store({
     },
     FAV_KEYS (context, payload) {
       context.commit('setFavKeys', payload)
+    },
+    IS_PREVIEW (context, payload) {
+      context.commit('setIsPreview', payload)
+    },
+    LIST_TYPE (context, payload) {
+      context.commit('setListType', payload)
+    },
+    CURRENT_TITLE (context, payload) {
+      context.commit('setCurrentTitle', payload)
+    },
+    SHOW_ABOUT (context, payload) {
+      context.commit('setIsAbout', payload)
     }
 
     // async SAVE_FAV (context, payload) {

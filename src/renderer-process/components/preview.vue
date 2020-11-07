@@ -31,6 +31,15 @@
             </p>
           </div>
         </div>
+        <div v-if="item.metadata" class="suggested-action">
+          <div class="text-wrapper">
+            <h2>Audio Meta Info</h2>
+            <hr style="margin-bottom: 10px; margin-top: 5px;">
+            <p v-for="(value, name) in item.metadata" :key="name" class="description">
+              <span>{{name}}</span> : <span>{{value}}</span>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,8 +59,8 @@ export default {
   },
   watch: {
     selectedContent (newVal, oldVal) {
-      console.log('selectedContent change newVal : ', newVal)
-      console.log('selectedContent change oldVal : ', oldVal)
+      // console.log('selectedContent change newVal : ', newVal)
+      // console.log('selectedContent change oldVal : ', oldVal)
       if (newVal === null) {
         this.item = null
         return
@@ -78,6 +87,15 @@ export default {
         const resParse = JSON.parse(res)
         item.srcData = `data:${item.data.mimeType};base64, ${resParse.base64}`
         item.exifrInfo = resParse.exifrInfo
+      } else if ((item.data.mimeType).startsWith('audio')) {
+        const res = window.ipcRenderer.sendSync('req_audioData', item)
+        const resParse = JSON.parse(res)
+        if (resParse.cover && resParse.base64) {
+          item.srcData = `data:${resParse.cover.format};base64, ${resParse.base64}`
+        }
+        item.metadata = resParse.metadata
+        // console.log('audio item.metadata :', item.metadata)
+        // console.log('audio resParse.base64 :', resParse.base64)
       }
 
       this.item = item

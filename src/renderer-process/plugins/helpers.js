@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { getFileIcon, getFileSizeIEC, getFileType, getFileTime } from '@/lib/common'
+import { getFileIcon, getFileSizeIEC, getFileType, getFileTime, generateUUID } from '@/lib/common'
 
 const plugin = {
   install (Vue, options) {
@@ -7,6 +7,7 @@ const plugin = {
     Vue.prototype.$getFileSizeIEC = getFileSizeIEC
     Vue.prototype.$getFileType = getFileType
     Vue.prototype.$getFileTime = getFileTime
+    Vue.prototype.$generateUUID = generateUUID
   }
 }
 

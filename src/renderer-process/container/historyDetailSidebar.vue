@@ -1,15 +1,31 @@
 <template>
   <div
+    v-if="$store.state.isPreview"
     id="repository-sidebar"
     class="resizable-component"
     :style="{width: width + 'px', maxWidth: maximumWidth + 'px', minWidth: minimumWidth+ 'px'}" >
-    <folderContents />
+    <folderContentsList v-if="$store.state.listType === 'TableView'"/>
+    <folderContentsGrid v-if="$store.state.listType === 'GridView'"/>
+    <folderContentsSimple v-if="$store.state.listType === 'SimpleView'"/>
+    <div @mousedown="handleDragStart" class="resize-handle"></div>
+  </div>
+
+  <div
+    v-else
+    id="repository-sidebar"
+    class="resizable-component"
+    :style="{width: '100%'}" >
+    <folderContentsList v-if="$store.state.listType === 'TableView'"/>
+    <folderContentsGrid v-if="$store.state.listType === 'GridView'"/>
+    <folderContentsSimple v-if="$store.state.listType === 'SimpleView'"/>
     <div @mousedown="handleDragStart" class="resize-handle"></div>
   </div>
 </template>
 
 <script>
-import folderContents from '@/renderer-process/components/folderContents.vue'
+import folderContentsList from '@/renderer-process/components/folderContentsList.vue'
+import folderContentsGrid from '@/renderer-process/components/folderContentsGrid.vue'
+import folderContentsSimple from '@/renderer-process/components/folderContentsSimple.vue'
 
 export default {
   props: {
@@ -20,7 +36,9 @@ export default {
   },
 
   components: {
-    folderContents
+    folderContentsList,
+    folderContentsGrid,
+    folderContentsSimple
   },
 
   data () {

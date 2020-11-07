@@ -13,7 +13,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="item in $store.state.folderContents" :key="item.label" @dblclick="onDbClickItem(item)" @click="onClickItem(item)">
+              <tr v-for="item in $store.state.folderContents" :key="item.label"
+                @dblclick="onDbClickItem(item)"
+                @click="onClickItem(item)">
                 <td class="folder-contents-table-td-1">
                   <div class="folder-contents-table-td-div">
                     <v-icon medium left class="folder-icon">{{$getFileIcon(item.data)}}</v-icon>

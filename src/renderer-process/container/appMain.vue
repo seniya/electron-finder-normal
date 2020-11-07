@@ -10,12 +10,19 @@
 import appTitleBar from '@/renderer-process/container/appTitleBar.vue'
 import appContents from '@/renderer-process/container/appContents.vue'
 
+import { ipcRenderer } from 'electron'
+window.ipcRenderer = ipcRenderer
+
 export default {
   components: {
-    // contentsToolbar,
-    // contentsRepository,
     appTitleBar,
     appContents
+
+  },
+  created () {
+    window.ipcRenderer.on('showAbout', (event, res) => {
+      this.$store.dispatch('SHOW_ABOUT', true)
+    })
   }
 }
 </script>
