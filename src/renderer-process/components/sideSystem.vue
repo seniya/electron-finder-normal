@@ -40,9 +40,6 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron'
-window.ipcRenderer = ipcRenderer
-
 export default {
   components: {},
   data () {
@@ -152,13 +149,4 @@ export default {
 </script>
 
 <style lang="scss" >
-.v-treeview--dense .v-treeview-node__root {
-  min-height: 35px !important;
-}
-.pc-icon {
-  color: rgba($color: rgb(43, 22, 7), $alpha: 0.5) !important
-}
-.folder-icon {
-  color: rgba($color: #ccc, $alpha: 0.3) !important
-}
 </style>

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import _ from 'lodash'
 
 Vue.use(Vuex)
 
@@ -15,18 +14,6 @@ function getObject (array, key, value) {
   })
   return o
 }
-// import { openDB } from 'idb'
-// const dbName = 'finder'
-// const dbTbName = 'fav'
-
-// function initIndexDb () {
-//   return openDB(dbName, 1, {
-//     upgrade: db => {
-//       db.createObjectStore(dbTbName)
-//     }
-//   })
-// }
-// const indexDb = initIndexDb()
 
 export default new Vuex.Store({
   state: {
@@ -149,29 +136,6 @@ export default new Vuex.Store({
     SHOW_ABOUT (context, payload) {
       context.commit('setIsAbout', payload)
     }
-
-    // async SAVE_FAV (context, payload) {
-    //   const indexDb = await openDB(dbName, 1, {
-    //     upgrade: db => {
-    //       db.createObjectStore(dbTbName)
-    //     }
-    //   })
-    //   console.log('SAVE_FAV indexDb : ', indexDb)
-    //   const allKeys = await indexDb.getAllKeys(dbTbName)
-    //   if (allKeys.includes(payload.data.stat.ino) === false) {
-    //     await indexDb.add(dbTbName, payload, payload.data.stat.ino)
-    //     context.dispatch('SYNC_FAV', allKeys)
-    //   }
-    // },
-    // async SYNC_FAV (context, payload) {
-    //   const indexDb = await openDB(dbName, 1, {
-    //     upgrade: db => {
-    //       db.createObjectStore(dbTbName)
-    //     }
-    //   })
-    //   const allKeys = await indexDb.getAllKeys(dbTbName)
-    //   context.commit('setFavList', allKeys)
-    // }
   },
   modules: {}
 })

@@ -1,6 +1,5 @@
 import { Menu } from 'electron'
 
-// this.ZoomInFactors = [1, 1.1, 1.25, 1.5, 1.75, 2]
 const ZoomInFactors = [1, 1.2, 1.5, 1.75, 2, 3]
 const ZoomOutFactors = ZoomInFactors.slice().reverse()
 

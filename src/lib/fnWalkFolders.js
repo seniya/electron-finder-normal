@@ -12,8 +12,6 @@ const fs = require('fs')
 function * fnWalkFolders (folder, recurseLevel = 0) {
   try {
     const files = fs.readdirSync(folder)
-    // console.log('walkFolders folder : ', folder)
-    // console.log('walkFolders files : ', files)
     for (const file of files) {
       try {
         const pathToFile = path.join(folder, file)

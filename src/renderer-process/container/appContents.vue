@@ -1,25 +1,24 @@
 <template>
   <div id="desktop-app-contents">
     <contentsToolbar />
-    <contentsRepository />
+    <contentsMain />
     <aboutApp v-if="$store.state.isAbout" />
   </div>
 </template>
 
 <script>
 import contentsToolbar from '@/renderer-process/container/contentsToolbar.vue'
-import contentsRepository from '@/renderer-process/container/contentsRepository.vue'
+import contentsMain from '@/renderer-process/container/contentsMain.vue'
 import aboutApp from '@/renderer-process/components/aboutApp.vue'
 
 export default {
   components: {
     contentsToolbar,
-    contentsRepository,
+    contentsMain,
     aboutApp
   }
 }
 </script>
 
 <style>
-
 </style>

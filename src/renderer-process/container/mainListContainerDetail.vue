@@ -1,6 +1,6 @@
 <template>
   <div class="commit-details">
-    <historyDetailSidebar
+    <mainListContainerDetailSidebar
       :width="$store.state.detailbarWidth"
       :maximumWidth="1000"
       :minimumWidth="400"
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import historyDetailSidebar from '@/renderer-process/container/historyDetailSidebar.vue'
+import mainListContainerDetailSidebar from '@/renderer-process/container/mainListContainerDetailSidebar.vue'
 import preview from '@/renderer-process/components/preview.vue'
 export default {
   components: {
-    historyDetailSidebar,
+    mainListContainerDetailSidebar,
     preview
   },
   methods: {
@@ -26,5 +26,4 @@ export default {
 </script>
 
 <style>
-
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="focus-container">
-    <repositoryFocusContainerSidebar
+    <mainSideContainerSidebar
       :width="$store.state.sidebarWidth"
       :maximumWidth="600"
       :minimumWidth="200"
@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import repositoryFocusContainerSidebar from '@/renderer-process/container/repositoryFocusContainerSidebar.vue'
+import mainSideContainerSidebar from '@/renderer-process/container/mainSideContainerSidebar.vue'
 export default {
   components: {
-    repositoryFocusContainerSidebar
+    mainSideContainerSidebar
   },
   methods: {
     onResize (width) {
@@ -23,5 +23,4 @@ export default {
 </script>
 
 <style>
-
 </style>

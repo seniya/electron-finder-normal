@@ -3,7 +3,6 @@ import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import IpcRegister from './main-process/IpcRegister'
 import { buildDefaultMenu } from './main-process/buildDefaultMenu'
-// import path from 'path'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -15,7 +14,6 @@ async function createWindow () {
   const win = new BrowserWindow({
     width: 1400,
     height: 800,
-    // frame: false,
     titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,
@@ -60,15 +58,6 @@ app.on('ready', async () => {
   ipcRegister.registerOn()
 
   createWindow()
-
-  // const menu = Menu.buildFromTemplate(
-  //   buildDefaultMenu(win.webContents)
-  // )
-
-  // globalShortcut.register('Alt+F4', () => {
-  //   console.log('Alt+F4 눌러짐.')
-  //   app.quit()
-  // })
 })
 
 if (isDevelopment) {

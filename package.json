@@ -15,9 +15,7 @@
   "dependencies": {
     "@mdi/font": "^3.6.95",
     "core-js": "^3.6.5",
-    "custom-electron-titlebar": "^3.2.5",
     "exifr": "^6.0.0",
-    "fluent-ffmpeg": "^2.1.2",
     "idb": "^5.0.7",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
@@ -26,7 +24,6 @@
     "sharp": "^0.26.2",
     "video-metadata-thumbnails": "^1.0.18",
     "vue": "^2.6.11",
-    "vue-jstree": "^2.1.6",
     "vuetify": "^2.2.11",
     "vuex": "^3.4.0"
   },

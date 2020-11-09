@@ -8,7 +8,6 @@ const fs = require('fs')
 const path = require('path')
 const sharp = require('sharp')
 const mm = require('music-metadata')
-// const ffmpeg = require('fluent-ffmpeg')
 
 class IpcRegister {
   constructor (ipcMain) {
