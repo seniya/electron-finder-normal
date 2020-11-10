@@ -37,8 +37,6 @@
 
 <script>
 import { openDB } from 'idb'
-import { ipcRenderer } from 'electron'
-window.ipcRenderer = ipcRenderer
 
 export default {
   components: {},
@@ -125,14 +123,5 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-.v-treeview--dense .v-treeview-node__root {
-  min-height: 35px !important;
-}
-.pc-icon {
-  color: rgba($color: rgb(43, 22, 7), $alpha: 0.5) !important
-}
-.folder-icon {
-  color: rgba($color: #ccc, $alpha: 0.3) !important
-}
+<style lang="scss">
 </style>
