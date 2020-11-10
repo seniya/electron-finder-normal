@@ -1,8 +1,7 @@
 # Simple-Finder
 First of all, I would like to thank [GitHub Desktop](https://desktop.github.com/) and [Jeff Galbraith](https://medium.com/quasar-framework/building-an-electron-file-explorer-with-quasar-and-vue-7bf94f1bbf6).
 
-This application is a basic function of file finder.   
-The purpose of this application is to see the basic functions and possibilities of Electron through a relatively simple project.
+This application is a basic function of file finder. The purpose of this application is to see the basic functions and possibilities of Electron through a relatively simple project.
 
 I hope many people can learn the function of Electron easily through the source of this project.
 
@@ -13,9 +12,9 @@ Top feature: Local System File Explorer (Windows 10 only)
 
 - Moving drives and folders using the [TreeView Component](https://vuetifyjs.com/en/components/treeview/)
 - Reactive sorting of contents
-- Output meta information from images and music files
-- Implementing Favorites for Folders
-- Dynamic Application Layout
+- Output meta information from [images](https://github.com/MikeKovarik/exifr) and [music](https://github.com/borewit/music-metadata) files
+- Implementing [Favorites](https://github.com/jakearchibald/idb) for Folders
+- Dynamic Application [Layout]((https://desktop.github.com/))
 
 ## Learning point
 - You can learn about basic `electron` functions and the use of `vuejs`.
@@ -53,13 +52,14 @@ npm run electron:build  <-- BUILD MODE
 2. The basic idea of this application came from [Jeff Galbraith](https://medium.com/quasar-framework/building-an-electron-file-explorer-with-quasar-and-vue-7bf94f1bbf6).
 3. Main Icon By <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a>
 
+### At the end
+Sorry that my english 😝
 
 <!-- 
 ![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_01.gif?raw=true)
-
 ![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_02.gif?raw=true)
-
-![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_03.gif?raw=true) -->
+![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_03.gif?raw=true) 
+-->
 
 
 
