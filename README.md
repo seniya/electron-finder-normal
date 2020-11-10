@@ -16,7 +16,7 @@ Top feature: Local System File Explorer (Windows 10 only)
 - Implementing [Favorites](https://github.com/jakearchibald/idb) for Folders
 - Dynamic Application [Layout]((https://desktop.github.com/))
 
-## Learning point
+## Learning Point
 - You can learn about basic `electron` functions and the use of `vuejs`.
 - You can learn folder and file navigation using `node FS` module.
 - You can learn the `TreeView` UI function through recursive navigation.
