@@ -1,8 +1,10 @@
+/* global __static */
 import { app, protocol, BrowserWindow, ipcMain, Menu } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import IpcRegister from './main-process/IpcRegister'
 import { buildDefaultMenu } from './main-process/buildDefaultMenu'
+import path from 'path'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -18,7 +20,8 @@ async function createWindow () {
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false
-    }
+    },
+    icon: path.join(__static, 'icon.png')
     // icon: path.join(__dirname, 'bundled/favicon.ico')
   })
   win.setMenuBarVisibility(true)

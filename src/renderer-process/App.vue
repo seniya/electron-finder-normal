@@ -61,4 +61,45 @@ export default {
     }
   }
 
+  .flex-wrapper-simple {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 20px;
+    padding-top: 20px;
+
+    .flex-item {
+      width: 200px;
+      min-height: 50px;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+
+      .item-icon-wrapper {
+        text-align: center;
+
+        .item-icon {
+          font-size: 30px !important;
+        }
+      }
+      .item-text-wrapper {
+        font-size: 12px;
+        text-align: left;
+        padding: 5px;
+        display: -webkit-box;
+        max-width: 170px;
+        height: 41px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 1.625;
+      }
+    }
+
+    .flex-item:hover {
+      background-color: rgba($color: #eeeeee, $alpha: 0.3)
+    }
+  }
+
 </style>

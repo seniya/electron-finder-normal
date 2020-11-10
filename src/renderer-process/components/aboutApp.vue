@@ -17,6 +17,8 @@
             (<a class="link-button-component">Source at</a>)
             <p class="no-padding"><a class="link-button-component">Terms and Conditions</a></p>
             <p><a class="link-button-component">License and Open Source Notices</a></p>
+            <p>Main Icon made by <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a></p>
+            <p>말 Icon mady by Me!</p>
           </div>
 
           <div class="modal-footer">
