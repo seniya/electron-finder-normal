@@ -47,19 +47,16 @@ npm run electron:serve  <-- DEV MODE
 npm run electron:build  <-- BUILD MODE
 ```
 
-### Thanks once again.
+### More screenshot 
+[inder_sample_01](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_01.gif?raw=true)   
+[inder_sample_02](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_02.gif?raw=true)   
+[inder_sample_03](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_03.gif?raw=true) 
+
+
+### Thanks once again
 1. The main design of this application was brought from [GitHub Desktop](https://desktop.github.com/).
 2. The basic idea of this application came from [Jeff Galbraith](https://medium.com/quasar-framework/building-an-electron-file-explorer-with-quasar-and-vue-7bf94f1bbf6).
 3. Main Icon By <a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon"> www.flaticon.com</a>
 
 ### At the end
 Sorry that my english 😝
-
-<!-- 
-![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_01.gif?raw=true)
-![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_02.gif?raw=true)
-![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample_03.gif?raw=true) 
--->
-
-
-
