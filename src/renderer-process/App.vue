@@ -102,4 +102,56 @@ export default {
     }
   }
 
+  .v-data-table__wrapper {
+    height: calc(100vh - 70px) !important;
+    overflow: auto !important;
+  }
+  .folder-contents-table-th {
+    font-size: 1rem !important;
+  }
+  .folder-contents-table-td-1 {
+    min-width: 100px;
+    max-width: 500px;
+    font-size: 1rem !important;
+  }
+  .folder-contents-table-td-2 {
+    width: 100px;
+    text-align: center;
+    font-size: 1rem !important;
+  }
+  .folder-contents-table-td-3 {
+    text-align: center;
+    font-size: 1rem !important;
+  }
+  .folder-contents-table-td-4 {
+    width: 100px;
+    text-align: right;
+    font-size: 1rem !important;
+  }
+  .folder-contents-table-td-div {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .v-treeview--dense .v-treeview-node__root {
+    min-height: 35px !important;
+  }
+  .pc-icon {
+    color: rgba($color: rgb(43, 22, 7), $alpha: 0.5) !important
+  }
+  .folder-icon {
+    color: rgba($color: #ccc, $alpha: 0.3) !important
+  }
+
+  .v-treeview--dense .v-treeview-node__root {
+    min-height: 35px !important;
+  }
+  .pc-icon {
+    color: rgba($color: rgb(43, 22, 7), $alpha: 0.5) !important
+  }
+  .folder-icon {
+    color: rgba($color: #aaaaaa, $alpha: 0.8) !important
+  }
 </style>
