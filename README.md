@@ -6,7 +6,7 @@ The purpose of this application is to see the basic functions and possibilities 
 
 I hope many people can learn the function of Electron easily through the source of this project.
 
-![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample-pic-01?raw=true)
+![ex_screenshot1](https://github.com/seniya/electron-finder-normal/blob/main/desc_picture/finder_sample-pic-01.png?raw=true)
 
 ## Functions and Features
 Top feature: Local System File Explorer (Windows 10 only)
