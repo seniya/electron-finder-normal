@@ -15,6 +15,7 @@ Top feature: Local System File Explorer (Windows 10 only)
 - Output meta information from [images](https://github.com/MikeKovarik/exifr) and [music](https://github.com/borewit/music-metadata) files
 - Implementing [Favorites](https://github.com/jakearchibald/idb) for Folders
 - Dynamic Application [Layout]((https://desktop.github.com/))
+- Sure MIT License
 
 ## Learning Point
 - You can learn about basic `electron` functions and the use of `vuejs`.
@@ -24,6 +25,7 @@ Top feature: Local System File Explorer (Windows 10 only)
 - You can learn how to get meta information and images through `exifr` and `music-metadata`.
 - You can learn how to use IndexedDB through the Favorites feature using `idb`.
 
+I Hope. After analyzing this source, you will be able to create your own cool application.
 
 ## Development environment Summary
 I started development with [vue-cli-plugin-electron-builder](https://github.com/nklayman/vue-cli-plugin-electron-builder). and ,
